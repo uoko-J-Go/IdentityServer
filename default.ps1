@@ -92,7 +92,7 @@ task CreateNuGetPackage -depends ILMerge {
 	}
 
 
-	copy-item $src_directory\IdentityServer3.nuspec $dist_directory
+	copy-item $src_directory\IdentityServer3-uoko.nuspec $dist_directory
 	copy-item $output_directory\IdentityServer3.xml $dist_directory\lib\net45\
-	exec { . $nuget_path pack $dist_directory\IdentityServer3.nuspec -BasePath $dist_directory -o $dist_directory -version $packageVersion }
+	exec { . $nuget_path pack $dist_directory\IdentityServer3-uoko.nuspec -BasePath $dist_directory -o $dist_directory -version $packageVersion }
 }
