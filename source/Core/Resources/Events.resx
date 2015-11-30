@@ -118,45 +118,59 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ClientPermissionsRevoked" xml:space="preserve">
-    <value>Client Permissions Revoked</value>
+    <value>客户端权限回收</value>
+    <comment>Client Permissions Revoked</comment>
   </data>
   <data name="CspReport" xml:space="preserve">
-    <value>Content Security Policy (CSP) Report</value>
+    <value>内容安全政策 (CSP) 报告</value>
+    <comment>Content Security Policy (CSP) Report</comment>
   </data>
   <data name="ExternalLoginError" xml:space="preserve">
-    <value>External Login Error</value>
+    <value>外部登录错误</value>
+    <comment>External Login Error</comment>
   </data>
   <data name="ExternalLoginFailure" xml:space="preserve">
-    <value>External Login Failure</value>
+    <value>外部登录失败</value>
+    <comment>External Login Failure</comment>
   </data>
   <data name="ExternalLoginSuccess" xml:space="preserve">
-    <value>External Login Success</value>
+    <value>外部登录成功</value>
+    <comment>External Login Success</comment>
   </data>
   <data name="LocalLoginFailure" xml:space="preserve">
-    <value>Local Login Failure</value>
+    <value>本地登录失败</value>
+    <comment>Local Login Failure</comment>
   </data>
   <data name="LocalLoginSuccess" xml:space="preserve">
-    <value>Local Login Success</value>
+    <value>本地登录成功</value>
+    <comment>Local Login Success</comment>
   </data>
   <data name="LogoutEvent" xml:space="preserve">
-    <value>Logout Event</value>
+    <value>注销事件</value>
+    <comment>Logout Event</comment>
   </data>
   <data name="PartialLogin" xml:space="preserve">
-    <value>Partial Login</value>
+    <value>部分登录</value>
+    <comment>Partial Login</comment>
   </data>
   <data name="PartialLoginComplete" xml:space="preserve">
-    <value>Partial Login Complete</value>
+    <value>部分登录完成</value>
+    <comment>Partial Login Complete</comment>
   </data>
   <data name="PreLoginFailure" xml:space="preserve">
-    <value>Pre-Login Failure</value>
+    <value>预登陆失败</value>
+    <comment>Pre-Login Failure</comment>
   </data>
   <data name="PreLoginSuccess" xml:space="preserve">
-    <value>Pre-Login Success</value>
+    <value>预登陆成功</value>
+    <comment>Pre-Login Success</comment>
   </data>
   <data name="ResourceOwnerFlowLoginFailure" xml:space="preserve">
-    <value>Resource Owner Password Flow Login Failure</value>
+    <value>资源所有者密码流程登录失败</value>
+    <comment>Resource Owner Password Flow Login Failure</comment>
   </data>
   <data name="ResourceOwnerFlowLoginSuccess" xml:space="preserve">
-    <value>Resource Owner Password Flow Login Success</value>
+    <value>资源所有者密码流程登录成功</value>
+    <comment>Resource Owner Password Flow Login Success</comment>
   </data>
 </root>

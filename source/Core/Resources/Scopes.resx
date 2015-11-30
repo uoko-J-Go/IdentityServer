@@ -118,30 +118,39 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="address_DisplayName" xml:space="preserve">
-    <value>Your postal address</value>
+    <value>您的邮政地址</value>
+    <comment>Your postal address</comment>
   </data>
   <data name="all_claims_DisplayName" xml:space="preserve">
-    <value>All user information</value>
+    <value>所有用户信息</value>
+    <comment>All user information</comment>
   </data>
   <data name="email_DisplayName" xml:space="preserve">
-    <value>Your email address</value>
+    <value>您的邮箱地址</value>
+    <comment>Your email address</comment>
   </data>
   <data name="offline_access_DisplayName" xml:space="preserve">
-    <value>Offline access</value>
+    <value>离线访问</value>
+    <comment>Offline access</comment>
   </data>
   <data name="openid_DisplayName" xml:space="preserve">
-    <value>Your user identifier</value>
+    <value>您的用户标识符</value>
+    <comment>Your user identifier</comment>
   </data>
   <data name="phone_DisplayName" xml:space="preserve">
-    <value>Your phone number</value>
+    <value>您的电话号码</value>
+    <comment>Your phone number</comment>
   </data>
   <data name="profile_Description" xml:space="preserve">
-    <value>Your user profile information (first name, last name, etc.)</value>
+    <value>您的基本信息(名、姓等)</value>
+    <comment>Your user profile information (first name, last name, etc.)</comment>
   </data>
   <data name="profile_DisplayName" xml:space="preserve">
-    <value>User profile</value>
+    <value>用户概况</value>
+    <comment>User profile</comment>
   </data>
   <data name="roles_DisplayName" xml:space="preserve">
-    <value>User roles</value>
+    <value>用户角色</value>
+    <comment>User roles</comment>
   </data>
 </root>
