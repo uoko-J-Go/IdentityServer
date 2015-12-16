@@ -55,7 +55,7 @@
       <HintPath>..\packages\Autofac.WebApi2.3.4.0\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
     </Reference>
     <Reference Include="IdentityModel.Net45, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\IdentityModel.1.2.0\lib\net45\IdentityModel.Net45.dll</HintPath>
+      <HintPath>..\packages\IdentityModel.1.2.1\lib\net45\IdentityModel.Net45.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -127,6 +127,8 @@
       <Link>Properties\VersionAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="App_Packages\LibLog.4.2\LibLog.cs" />
+    <Compile Include="Configuration\AppBuilderExtensions\ConfigureRenderLoggedOutPageExtension.cs" />
+    <Compile Include="Configuration\AppBuilderExtensions\ConfigureSignOutMessageCookieExtension.cs" />
     <Compile Include="Configuration\AppBuilderExtensions\ConfigureIdentityServerIssuerExtension.cs" />
     <Compile Include="Configuration\AppBuilderExtensions\ConfigureRequestIdExtension.cs" />
     <Compile Include="Configuration\AppBuilderExtensions\ConfigureHttpLoggingExtension.cs" />
@@ -134,11 +136,15 @@
     <Compile Include="Configuration\AuthenticationTicketModel.cs" />
     <Compile Include="Configuration\CookieSecureMode.cs" />
     <Compile Include="Configuration\EventsOptions.cs" />
+    <Compile Include="Configuration\Hosting\ClientListCookie.cs" />
     <Compile Include="Configuration\InputLengthRestrictions.cs" />
     <Compile Include="Configuration\IAuthenticationSessionStoreProvider.cs" />
     <Compile Include="Configuration\X509CertificateDataProtector.cs" />
+    <Compile Include="Endpoints\Connect\IntrospectionEndpointController.cs" />
     <Compile Include="Endpoints\Connect\RevocationEndpointController.cs" />
     <Compile Include="Endpoints\WelcomeController.cs" />
+    <Compile Include="Events\Authentication\ClientAuthenticationDetails.cs" />
+    <Compile Include="Events\EndpointDetail.cs" />
     <Compile Include="Extensions\DateTimeOffsetHelper.cs" />
     <Compile Include="Extensions\DateTimeHelper.cs" />
     <Compile Include="Configuration\Hosting\LastUserNameCookie.cs" />
@@ -153,7 +159,7 @@
     <Compile Include="Events\TokenService\AccessTokenIssuedDetails.cs" />
     <Compile Include="Events\Authentication\LogoutDetails.cs" />
     <Compile Include="Events\Base\Event.cs" />
-    <Compile Include="Events\EndpointDetail.cs" />
+    <Compile Include="Events\IntrospectionEndpointDetail.cs" />
     <Compile Include="Events\TokenService\AuthorizationCodeIssuedDetails.cs" />
     <Compile Include="Events\TokenService\RefreshTokenDetails.cs" />
     <Compile Include="Events\TokenService\RefreshTokenRefreshDetails.cs" />
@@ -225,7 +231,12 @@
     <Compile Include="Services\Caching\CachingScopeStore.cs" />
     <Compile Include="Services\DefaultViewService\DefaultViewServiceOptions.cs" />
     <Compile Include="Services\DefaultViewService\DefaultViewServiceRegistration.cs" />
+    <Compile Include="Services\Default\DefaultTokenSigningService.cs" />
     <Compile Include="Validation\BasicAuthenticationSecretParser.cs" />
+    <Compile Include="Validation\IntrospectionRequestValidationResult.cs" />
+    <Compile Include="Validation\IntrospectionRequestValidator.cs" />
+    <Compile Include="Validation\ScopeSecretValidationResult.cs" />
+    <Compile Include="Validation\ScopeSecretValidator.cs" />
     <Compile Include="Validation\ClientSecretValidator.cs" />
     <Compile Include="Services\Default\DefaultCache.cs" />
     <Compile Include="Services\Default\AutofacDependencyResolver.cs" />
@@ -274,7 +285,7 @@
     <Compile Include="Services\ExternalClaimsFilter\ExternalClaimsFilterUserService.cs" />
     <Compile Include="Services\ExternalClaimsFilter\FacebookClaimsFilter.cs" />
     <Compile Include="Services\IEventService.cs" />
-    <Compile Include="Validation\ClientValidationResult.cs" />
+    <Compile Include="Validation\ClientSecretValidationResult.cs" />
     <Compile Include="Validation\CustomGrantValidationResult.cs" />
     <Compile Include="Logging\Models\AuthorizeRequestValidationLog.cs" />
     <Compile Include="Logging\Models\ClientValidationLog.cs" />
@@ -365,7 +376,6 @@
     <Compile Include="Services\DefaultViewService\DefaultViewService.cs" />
     <Compile Include="Services\IRefreshTokenService.cs" />
     <Compile Include="Services\IRefreshTokenStore.cs" />
-    <Compile Include="Services\Default\DefaultTokenSigningService.cs" />
     <Compile Include="Services\ITokenSigningService.cs" />
     <Compile Include="Configuration\Hosting\AutofacScope.cs" />
     <Compile Include="Configuration\Hosting\HostDataProtector.cs" />
@@ -540,6 +550,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Services\DefaultViewService\PageAssets\SignoutFrame.html" />
     <EmbeddedResource Include="Services\DefaultViewService\PageAssets\welcome.html" />
     <EmbeddedResource Include="Services\DefaultViewService\PageAssets\checksession.html" />
     <EmbeddedResource Include="Services\DefaultViewService\HttpAssets\app\FormPostResponse.js" />

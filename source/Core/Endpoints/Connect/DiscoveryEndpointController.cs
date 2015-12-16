@@ -20,6 +20,7 @@ using IdentityServer3.Core.Extensions;
 using IdentityServer3.Core.Logging;
 using IdentityServer3.Core.Models;
 using IdentityServer3.Core.Services;
+using Microsoft.Owin;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -38,16 +39,18 @@ namespace IdentityServer3.Core.Endpoints
         private readonly static ILog Logger = LogProvider.GetCurrentClassLogger();
         private readonly IdentityServerOptions _options;
         private readonly IScopeStore _scopes;
+        private readonly IOwinContext _context;
 
         static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
         {
             NullValueHandling = NullValueHandling.Ignore
         };
 
-        public DiscoveryEndpointController(IdentityServerOptions options, IScopeStore scopes)
+        public DiscoveryEndpointController(IdentityServerOptions options, IScopeStore scopes, IOwinContext context)
         {
             _options = options;
             _scopes = scopes;
+            _context = context;
         }
 
         /// <summary>
@@ -78,7 +81,7 @@ namespace IdentityServer3.Core.Endpoints
 
             var dto = new DiscoveryDto
             {
-                issuer = _options.IssuerUri,
+                issuer = _context.GetIdentityServerIssuerUri(),
                 scopes_supported = scopes.Where(s => s.ShowInDiscoveryDocument).Select(s => s.Name).ToArray(),
                 claims_supported = claims.Distinct().ToArray(),
                 response_types_supported = Constants.SupportedResponseTypes.ToArray(),
@@ -86,8 +89,13 @@ namespace IdentityServer3.Core.Endpoints
                 grant_types_supported = supportedGrantTypes.ToArray(),
                 subject_types_supported = new[] { "public" },
                 id_token_signing_alg_values_supported = new[] { Constants.SigningAlgorithms.RSA_SHA_256 },
-                token_endpoint_auth_methods_supported = new[] { Constants.TokenEndpointAuthenticationMethods.PostBody, Constants.TokenEndpointAuthenticationMethods.BasicAuthentication }
+                token_endpoint_auth_methods_supported = new[] { Constants.TokenEndpointAuthenticationMethods.PostBody, Constants.TokenEndpointAuthenticationMethods.BasicAuthentication },
             };
+
+            if (_options.Endpoints.EnableEndSessionEndpoint)
+            {
+                dto.http_logout_supported = true;
+            }
 
             if (_options.Endpoints.EnableAuthorizeEndpoint)
             {
@@ -117,6 +125,11 @@ namespace IdentityServer3.Core.Endpoints
             if (_options.Endpoints.EnableTokenRevocationEndpoint)
             {
                 dto.revocation_endpoint = baseUrl + Constants.RoutePaths.Oidc.Revocation;
+            }
+
+            if (_options.Endpoints.EnableIntrospectionEndpoint)
+            {
+                dto.introspection_endpoint = baseUrl + Constants.RoutePaths.Oidc.Introspection;
             }
 
             if (_options.SigningCertificate != null)
@@ -176,6 +189,8 @@ namespace IdentityServer3.Core.Endpoints
             public string end_session_endpoint { get; set; }
             public string check_session_iframe { get; set; }
             public string revocation_endpoint { get; set; }
+            public string introspection_endpoint { get; set; }
+            public bool? http_logout_supported { get; set; }
             public string[] scopes_supported { get; set; }
             public string[] claims_supported { get; set; }
             public string[] response_types_supported { get; set; }
