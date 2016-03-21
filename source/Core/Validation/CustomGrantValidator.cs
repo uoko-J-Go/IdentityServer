@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
+using IdentityServer3.Core.Logging;
 using IdentityServer3.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using IdentityServer3.Core.Logging;
 
 namespace IdentityServer3.Core.Validation
 {
@@ -30,9 +30,14 @@ namespace IdentityServer3.Core.Validation
 
         public CustomGrantValidator(IEnumerable<ICustomGrantValidator> validators)
         {
-            if (validators == null) throw new ArgumentNullException("validators");
-
-            _validators = validators;
+            if (validators == null)
+            {
+                _validators = Enumerable.Empty<ICustomGrantValidator>();
+            }
+            else
+            {
+                _validators = validators;
+            }
         }
 
         public IEnumerable<string> GetAvailableGrantTypes()
@@ -45,11 +50,13 @@ namespace IdentityServer3.Core.Validation
             var validator = _validators.FirstOrDefault(v => v.GrantType.Equals(request.GrantType, StringComparison.Ordinal));
 
             if (validator == null)
+            {
                 return new CustomGrantValidationResult
                 {
                     IsError = true,
-                    ErrorDescription = "No validator found for grant type"
+                    Error = "No validator found for grant type"
                 };
+            }
 
             try
             {
@@ -61,7 +68,7 @@ namespace IdentityServer3.Core.Validation
                 return new CustomGrantValidationResult
                 {
                     IsError = true,
-                    ErrorDescription = "Grant validation error"
+                    Error = "Grant validation error",
                 };
             }
         }

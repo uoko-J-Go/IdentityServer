@@ -16,7 +16,6 @@
 
 using IdentityServer3.Core.Configuration;
 using IdentityServer3.Core.Configuration.Hosting;
-using IdentityServer3.Core.Events;
 using IdentityServer3.Core.Extensions;
 using IdentityServer3.Core.Logging;
 using IdentityServer3.Core.Models;
@@ -114,7 +113,9 @@ namespace IdentityServer3.Core.Endpoints
 
             Logger.Info("Redirecting back to permissions page");
 
-            return RedirectToRoute(Constants.RouteNames.ClientPermissions, null);
+            var url = Request.GetOwinContext().GetIdentityServerBaseUrl().EnsureTrailingSlash() +
+                Constants.RoutePaths.ClientPermissions;
+            return Redirect(url);
         }
 
         private IHttpActionResult RedirectToLogin()

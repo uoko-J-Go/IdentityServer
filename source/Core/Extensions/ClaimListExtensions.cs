@@ -95,6 +95,16 @@ namespace IdentityServer3.Core.Extensions
                 }
             }
 
+            if (claim.ValueType == Constants.ClaimValueTypes.Json)
+            {
+                try
+                {
+                    return JsonConvert.DeserializeObject(claim.Value);
+                }
+                catch { }
+                
+            }
+
             return claim.Value;
         }
     }
